@@ -204,7 +204,7 @@ body{font-family:'Atkinson Hyperlegible','Noto Sans Devanagari','Noto Sans Benga
 </a>
 <button class="menu" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')">☰</button>
 <nav id="nav">
-<a class="btn" href="chatbot.html">💬 Chatbot</a>
+<a class="btn" href="https://svara-ai-goch.vercel.app" target="_blank" rel="noopener">💬 Chatbot</a>
 <a class="btn" href="forum.html">👥 Forum</a>
 <a class="btn" href="meeting.html" >🎥 Meeting Platform</a>
 <div class="lang notranslate" translate="no"><button class="btn" id="lb" aria-haspopup="true" aria-expanded="false" aria-label="Change language">🌐 <span id="ll">English</span> ▾</button><div class="lp" id="lp" role="menu"></div></div>
@@ -216,7 +216,7 @@ body{font-family:'Atkinson Hyperlegible','Noto Sans Devanagari','Noto Sans Benga
 <div class="slider" id="home">
 <canvas id="wv" aria-hidden="true"></canvas>
 <div class="track" id="track">
-<div class="slide"><div class="txt"><h1>Compassionate support for dementia care</h1><p>Svara brings patients, caregivers and families together with tools that make every day a little easier.</p><a class="btn" href="chatbot.html">Talk to our Chatbot</a></div><div class="orb" aria-hidden="true">🧠</div></div>
+<div class="slide"><div class="txt"><h1>Compassionate support for dementia care</h1><p>Svara brings patients, caregivers and families together with tools that make every day a little easier.</p><a class="btn" href="https://svara-ai-goch.vercel.app" target="_blank" rel="noopener">Talk to our Chatbot</a></div><div class="orb" aria-hidden="true">🧠</div></div>
 <div class="slide"><div class="txt"><h1>You are not alone in this journey</h1><p>Join our community forum to share experiences, ask questions and find comfort in others who understand.</p><a class="btn" href="forum.html">Visit the Forum</a></div><div class="orb" aria-hidden="true">🤝</div></div>
 <div class="slide"><div class="txt"><h1>Meet experts and support groups live</h1><p>Connect face to face with doctors, counsellors and caregiver circles from the comfort of home.</p><a class="btn" href="meeting.html">Join a Meeting</a></div><div class="orb" aria-hidden="true">🎥</div></div>
 </div>
@@ -302,12 +302,11 @@ var $=function(s){return document.querySelector(s)};
 var esc=function(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
 var mode='in',err='',ob={i:0,d:{}},uid=null,uname=null,prof=null;
 const STEPS=[
-{k:'who',q:'Who is this check-in for?',h:'If you are answering for someone else, answer as you think they would.',t:'one',o:['Myself','Someone I care for']},
-{k:'feel',q:'How are you feeling today?',h:'There is no wrong answer.',t:'one',o:['Calm','Okay','Confused','Worried','Sad','Tired']},
-{k:'level',q:'Which sounds closest to daily life right now?',h:'This is a rough guide, not a diagnosis. A doctor can confirm the stage.',t:'one',o:['No diagnosis yet, but memory worries me','Mild: I forget recent things but manage on my own','Moderate: I need help with some daily tasks','Advanced: I need help with most things','I am not sure']},
-{k:'lost',q:'Do you ever feel lost or unsure where you are?',h:'This helps us suggest ways to keep you safe.',t:'one',o:['Never','Sometimes','Often']},
-{k:'comfort',q:'What helps you feel calm and safe?',h:'Choose all that fit.',t:'many',o:['Quiet and low light','Familiar music','Looking at photos','A steady daily routine','Short, simple sentences','Someone sitting beside me','A walk outside','Being called by my preferred name']},
-{k:'trust',q:'Who is someone you trust?',h:'This person can be told when you need help.',t:'trust'}
+{k:'forget',q:'What have you been forgetting recently?',h:'Choose all that fit. There is no wrong answer.',t:'many',o:['Names or faces','What was said a moment ago','Where I put things','Appointments or medicines','Words I want to say','Familiar places or routes','Nothing much so far']},
+{k:'dx',q:'Have you been diagnosed earlier?',h:'This helps us tailor your care plan. A doctor can always confirm the details.',t:'one',o:['Yes, Alzheimer\'s disease','Yes, another type of dementia','Yes, mild memory problems (MCI)','Not diagnosed, but memory worries me','No, or I am not sure']},
+{k:'close',q:'Who is someone you are close to?',h:'This person can be told when you need help.',t:'trust'},
+{k:'comfort',q:'What makes you comfortable?',h:'Choose all that fit.',t:'many',o:['Quiet and low light','Familiar music','Looking at photos','A steady daily routine','Short, simple sentences','Someone sitting beside me','A walk outside','Being called by my preferred name']},
+{k:'share',q:'Is there something you want to share?',h:'A memory, a worry, or anything on your mind. This is optional.',t:'text'}
 ];
 function openModal(m){mode=m||'in';err='';if(m==='onb')ob={i:0,d:Object.assign({},prof||{})};drawModal();$('#modal').classList.add('open')}
 function closeModal(){$('#modal').classList.remove('open')}
@@ -323,7 +322,7 @@ function mHTML(){
  +'<label for="p">Password</label><input id="p" type="password" autocomplete="'+(up?'new-password':'current-password')+'">'
  +(up?'<label for="p2">Confirm password</label><input id="p2" type="password" autocomplete="new-password">':'')
  +'<p class="err" role="alert">'+esc(err)+'</p><button class="btn primary" style="width:100%" onclick="'+(up?'signUp()':'signIn()')+'">'+(up?'Create account':'Sign in')+'</button>'
- +(up?'<p class="hint">After signing up you will answer 6 short questions so we can build your care plan.</p>':'');
+ +(up?'<p class="hint">After signing up you will answer 5 short questions so we can build your care plan.</p>':'');
 }
 function fbMsg(e){return({'auth/email-already-in-use':'That email already has an account. Sign in instead.','auth/invalid-email':'Enter a valid email address.','auth/weak-password':'Password needs at least 6 characters.','auth/invalid-credential':'Email or password is wrong. Check both, or create an account.','auth/network-request-failed':'No connection. Check the internet and try again.'})[e.code]||'Something went wrong. Please try again.'}
 async function signUp(){
@@ -362,6 +361,8 @@ function onbHTML(){
  if(s.t==='trust'){
   var f=function(id,l,v,ex){return '<label for="'+id+'">'+l+'</label><input id="'+id+'" value="'+esc(v||'')+'" maxlength="40" '+(ex||'')+'>'};
   body=f('tn','Their name',d.tn)+f('tr','How are they connected to you? (daughter, friend, nurse)',d.tr)+f('tph','Phone number (optional)',d.tph,'type="tel"')+f('pn','What would you like people to call you?',d.pn);
+ }else if(s.t==='text'){
+  body='<label for="sh" class="mute">Your words</label><textarea id="sh" rows="5" maxlength="500" placeholder="Write here, if you like">'+esc(d.share||'')+'</textarea>';
  }else{
   body='<div role="group" aria-label="'+esc(s.q)+'">'+s.o.map(function(o,j){
    var on=s.t==='one'?d[s.k]===o:(d[s.k]||[]).indexOf(o)>-1;
@@ -373,7 +374,7 @@ function onbHTML(){
 function pick(j){var s=STEPS[ob.i],o=s.o[j],d=ob.d;err='';
  if(s.t==='one')d[s.k]=o;else{var a=d[s.k]||[];d[s.k]=a.indexOf(o)>-1?a.filter(function(x){return x!==o}):a.concat(o)}
  drawModal()}
-function collect(){if(STEPS[ob.i].t!=='trust')return;['tn','tr','tph','pn'].forEach(function(id){ob.d[id]=$('#'+id).value.trim()})}
+function collect(){var t=STEPS[ob.i].t;if(t==='trust')['tn','tr','tph','pn'].forEach(function(id){ob.d[id]=$('#'+id).value.trim()});else if(t==='text')ob.d.share=$('#sh').value.trim()}
 function onbBack(){collect();err='';ob.i--;drawModal()}
 async function onbNext(){
  collect();var s=STEPS[ob.i],d=ob.d;
@@ -436,4 +437,3 @@ onAuthStateChanged(auth,u=>window.onAuth(u));
 </script>
 </body>
 </html>
-
