@@ -133,9 +133,7 @@ function startListen(){stopListen();if(window.FB)unT=FB.listenThreads(l=>{S.thre
 function stopListen(){if(unT)unT();if(unC)unC();unT=unC=null;S.threads=[];S.comments={}}
 function go(v,id){if(v==='auth'){location.href='index.html#signin';return}stopAll();act=null;view=v;openId=id||null;err='';if(unC){unC();unC=null}if(v==='thread'&&id&&window.FB&&S.uid)unC=FB.listenComments(id,l=>{S.comments[id]=l;if(view==='thread'&&!document.activeElement.matches('textarea'))render()});render();scrollTo(0,0)}
 function render(){
-  $('#user').innerHTML=`<a class="btn ghost" href="index.html" style="text-decoration:none;display:inline-flex;align-items:center">🏠 Home</a> <a class="btn ghost" href="meeting.html" style="text-decoration:none;display:inline-flex;align-items:center">🎥 Meeting</a> `+(S.session?`<span class="mute">Hi, <b>${esc(S.session)}</b></span> <button class="btn ghost" onclick="signOut()">Sign out</button>`:`<a class="btn" href="index.html#signin" style="text-decoration:none;display:inline-flex;align-items:center">Sign in</a>`);
-  const a=$('#app');
-  if(view==='new')a.innerHTML=newHTML();
+ 
   else if(view==='onb')a.innerHTML=onbHTML();
   else if(view==='plan'){a.innerHTML=planHTML();afterPlan()}
   else if(view==='thread')a.innerHTML=threadHTML();
