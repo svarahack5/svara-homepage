@@ -29,6 +29,7 @@ header::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:c
 .wordmark b{font-size:1.5rem;letter-spacing:.22em;background:linear-gradient(135deg,#fff 10%,var(--p1) 60%,#e6d3ff);-webkit-background-clip:text;background-clip:text;color:transparent}
 .wordmark small{margin-top:4px;font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
 .sp{flex:1}
+#home-link{display:inline-block;font-weight:700;font-size:.95rem;padding:10px 20px;border-radius:999px}
 .hi{font-size:.92rem;white-space:nowrap}.hi b{color:var(--p1)}
 #back{display:none}
 /* hero */
@@ -96,7 +97,7 @@ footer{text-align:center;padding:26px 20px;color:var(--muted);font-size:.85rem;b
 @keyframes rise{from{opacity:0;transform:translateY(30px)}}
 @keyframes pop{from{opacity:0;transform:scale(.88) translateY(14px)}}
 @media(max-width:860px){.hgrid{grid-template-columns:1fr;text-align:center;padding-top:110px;gap:18px}.hgrid p{margin-inline:auto}.orb{order:-1;width:150px;font-size:3.6rem}}
-@media(max-width:560px){.wordmark small,.hi{display:none}.wordmark b{font-size:1.25rem;letter-spacing:.18em}.logomark{width:40px;height:40px}}
+@media(max-width:560px){#home-link{padding:8px 12px}.wordmark small,.hi{display:none}.wordmark b{font-size:1.25rem;letter-spacing:.18em}.logomark{width:40px;height:40px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01s!important}}
 </style>
 </head>
@@ -105,6 +106,7 @@ footer{text-align:center;padding:26px 20px;color:var(--muted);font-size:.85rem;b
  <div class="bar">
   <button class="logo" id="logo" aria-label="Svara Brain Games home"><span class="logomark">🧠</span><span class="wordmark"><b>SVARA</b><small>Brain Games</small></span></button>
   <div class="sp"></div>
+  <a class="btn soft" href="index.html" id="home-link">← Svara</a>
   <button class="btn soft" id="back">← All games</button>
   <span class="hi">Welcome back, <b>km</b></span>
  </div>
