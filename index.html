@@ -42,7 +42,21 @@ header.s{background:rgba(16,10,28,.72)}
 /* thin scroll progress line */
 header::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc(var(--sp,0)*100%);background:linear-gradient(90deg,var(--p2),#e6d3ff)}
 .bar{max-width:1150px;margin:auto;display:flex;align-items:center;gap:14px;padding:10px 20px}
-.logo{display:flex;align-items:center;gap:12px}
+.logo{display:flex;align-items:center;gap:12px;flex:none}
+
+/* menu button: hidden on desktop, shown on mobile */
+.menu{
+  display:none;margin-left:auto;cursor:pointer;font:inherit;font-size:1.3rem;line-height:1;
+  width:44px;height:44px;border-radius:12px;color:var(--p1);
+  background:var(--soft);border:1px solid var(--line);
+}
+
+/* desktop nav: one row, pushed to the right */
+nav{display:flex;align-items:center;gap:10px;margin-left:auto}
+nav .btn{white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+#userbox{display:flex;align-items:center;gap:10px;white-space:nowrap}
+.hi{color:var(--text);font-size:.92rem;max-width:160px;overflow:hidden;text-overflow:ellipsis}
+.hi b{color:var(--p1)}
 
 /* round glowing badge around the logo */
 .logomark{
@@ -220,16 +234,25 @@ input:focus,textarea:focus{outline:2px solid var(--p2);box-shadow:0 0 0 6px rgba
 /* ---------- screen sizes ---------- */
 @media(min-width:861px){.translated-rtl .slide{text-align:right}}
 @media(max-width:860px){
-  .menu{display:block}
-  nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;padding:14px 20px;background:rgba(16,10,28,.92);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+  .menu{display:grid;place-items:center}
+  nav{
+    display:none;position:absolute;top:100%;left:0;right:0;margin-left:0;
+    flex-direction:column;align-items:stretch;gap:8px;padding:14px 20px;
+    max-height:calc(100svh - 70px);overflow-y:auto;
+    background:rgba(16,10,28,.94);
+    -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--line);
+  }
   nav.open{display:flex}
+  nav .btn{justify-content:center}
+  #userbox{justify-content:space-between;width:100%}
   .arrow{display:none}
   .slide{grid-template-columns:1fr;text-align:center;padding-top:112px;gap:18px}
   .slide h1{font-size:2rem}
   .slide p{margin-inline:auto}
   .orb{order:-1;width:150px;font-size:3.6rem}
   .lang{width:100%}
-  .lang>.btn{width:100%}
+  .lang>.btn{width:100%;justify-content:center}
   .lp{position:static;width:100%;margin-top:10px;max-height:50vh}
 }
 @media(max-width:700px){
@@ -240,8 +263,8 @@ input:focus,textarea:focus{outline:2px solid var(--p2);box-shadow:0 0 0 6px rgba
   .strip button.on span{display:block}
   .strip button.on{flex:2.2}
   .logomark{width:40px;height:40px;padding:6px}
-.wordmark b{font-size:1.25rem;letter-spacing:.18em}
-.wordmark small{display:none}
+  .wordmark b{font-size:1.25rem;letter-spacing:.18em}
+  .wordmark small{display:none}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition-duration:.01s!important}
