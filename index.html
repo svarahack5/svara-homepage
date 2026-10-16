@@ -124,7 +124,7 @@ nav .btn{white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
 .arrow{position:absolute;z-index:3;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;font-size:1.3rem;color:#fff;cursor:pointer;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(8px);transition:.25s}
 .arrow:hover{background:var(--p2);transform:translateY(-50%) scale(1.1)}
 .prev{left:16px}.next{right:16px}
-/* three tabs under the slider */
+/* tabs under the slider */
 .strip{position:relative;z-index:3;display:flex;gap:10px;width:100%;max-width:1150px;margin:0 auto;padding:0 20px 26px}
 .strip button{
   flex:1;min-width:0;position:relative;overflow:hidden;text-align:left;font:inherit;color:var(--text);cursor:pointer;
@@ -155,6 +155,7 @@ h2{font-size:2rem;color:#f1e9ff;letter-spacing:-.01em;margin:0 0 10px;text-align
 .card .i{display:inline-block;font-size:2.2rem;animation:bob 4s ease-in-out infinite}
 .card:nth-child(2) .i{animation-delay:-1.3s}
 .card:nth-child(3) .i{animation-delay:-2.6s}
+.card:nth-child(4) .i{animation-delay:-3.4s}
 .card h3{margin:8px 0 4px;color:#f1e9ff;font-size:1.2rem}
 .card p{margin:0;color:var(--muted);font-size:.92rem}
 
@@ -290,6 +291,7 @@ input:focus,textarea:focus{outline:2px solid var(--p2);box-shadow:0 0 0 6px rgba
       <a class="btn" href="https://svara-ai-goch.vercel.app" target="_blank" rel="noopener">💬 Chatbot</a>
       <a class="btn" href="forum.html" target="_blank" rel="noopener">👥 Forum</a>
       <a class="btn" href="meeting.html" target="_blank" rel="noopener">🎥 Meeting Platform</a>
+      <a class="btn" href="brain-games.html" target="_blank" rel="noopener">🎮 Brain Games</a>
       <div class="lang notranslate" translate="no">
         <button class="btn" id="lb" aria-haspopup="true" aria-expanded="false" aria-label="Change language">🌐 <span id="ll">English</span> ▾</button>
         <div class="lp" id="lp" role="menu"></div>
@@ -327,6 +329,14 @@ input:focus,textarea:focus{outline:2px solid var(--p2);box-shadow:0 0 0 6px rgba
       </div>
       <div class="orb" aria-hidden="true">🎥</div>
     </div>
+    <div class="slide">
+      <div class="txt">
+        <h1>Train your memory with gentle games</h1>
+        <p>Wordle, Match the Pairs, the Colour Stroop Test and the Aim Trainer: short, friendly exercises for focus and recall.</p>
+        <a class="btn" href="brain-games.html" target="_blank" rel="noopener">Play Brain Games</a>
+      </div>
+      <div class="orb" aria-hidden="true">🧩</div>
+    </div>
   </div>
   <button class="arrow prev" aria-label="Previous" onclick="go(current-1)">‹</button>
   <button class="arrow next" aria-label="Next" onclick="go(current+1)">›</button>
@@ -336,11 +346,12 @@ input:focus,textarea:focus{outline:2px solid var(--p2);box-shadow:0 0 0 6px rgba
 <!-- how Svara helps -->
 <section>
   <h2>How Svara helps</h2>
-  <p class="sub">Three simple tools, built with care for people living with dementia and those who look after them.</p>
+  <p class="sub">Four simple tools, built with care for people living with dementia and those who look after them.</p>
   <div class="grid">
     <a class="card" href="https://svara-ai-goch.vercel.app" target="_blank" rel="noopener"><div class="i">💬</div><h3>AI Chatbot</h3><p>Get gentle, instant answers about symptoms, daily routines and caregiving tips, any time of day.</p></a>
     <a class="card" href="forum.html" target="_blank" rel="noopener"><div class="i">👥</div><h3>Community Forum</h3><p>A safe space to share stories, ask questions and support one another.</p></a>
     <a class="card" href="meeting.html" target="_blank" rel="noopener"><div class="i">🎥</div><h3>Meeting Platform</h3><p>Schedule video sessions with specialists and join caregiver support groups.</p></a>
+    <a class="card" href="brain-games.html" target="_blank" rel="noopener"><div class="i">🎮</div><h3>Brain Games</h3><p>Fun memory and focus games that keep the mind active, a few minutes at a time.</p></a>
   </div>
 </section>
 
@@ -382,7 +393,7 @@ input:focus,textarea:focus{outline:2px solid var(--p2);box-shadow:0 0 0 6px rgba
 
 <!-- ================= slider, waves, scroll effects ================= -->
 <script>
-const total = 3;
+const total = 4;
 const slideTime = 6500;                       // ms per slide
 const reduceMotion = matchMedia('(prefers-reduced-motion:reduce)').matches;
 const track = document.getElementById('track');
@@ -393,10 +404,11 @@ let current = 0;
 let progress = 0;                             // 0 to 1, how far through the current slide
 let paused = false;
 
-// the three tabs under the slider
+// the tabs under the slider
 [['AI Chatbot', 'Ask anything, any hour'],
  ['Community Forum', 'Share with people who understand'],
- ['Meeting Platform', 'Consult an expert']].forEach(function (t, k) {
+ ['Meeting Platform', 'Consult an expert'],
+ ['Brain Games', 'Train your memory daily']].forEach(function (t, k) {
   const b = document.createElement('button');
   b.innerHTML = '<b>' + t[0] + '</b><span>' + t[1] + '</span><i></i>';
   b.onclick = function () { go(k); };
